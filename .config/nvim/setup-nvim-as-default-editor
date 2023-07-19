@@ -1,0 +1,70 @@
+#!/bin/bash
+
+if [[ $EUID -ne 0 ]]
+then
+    echo "This script must be run as root" 1>&2
+    exit 1
+fi
+
+set -euo pipefail
+
+# Create folder for different invocation scripts
+mkdir /usr/local/bin/neovim || true
+
+# Create and chmod "ex" script
+cat << EOF > /usr/local/bin/neovim/ex
+#!/bin/sh
+exec /usr/local/bin/nvim -e "\$@"
+EOF
+chmod +x /usr/local/bin/neovim/ex
+
+# Create and chmod "view" script
+cat << EOF > /usr/local/bin/neovim/view
+#!/bin/sh
+exec /usr/local/bin/nvim -R "\$@"
+EOF
+chmod +x /usr/local/bin/neovim/view
+
+# Create and chmod "vimdiff" script
+cat << EOF > /usr/local/bin/neovim/vimdiff
+#!/bin/sh
+exec /usr/local/bin/nvim -d "\$@"
+EOF
+chmod +x /usr/local/bin/neovim/vimdiff
+
+read -p "Do you want NVIM to provide 'vi'? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    update-alternatives --install /usr/bin/vi vi "/usr/local/bin/nvim" 110
+fi
+
+read -p "Do you want NVIM to provide 'vim'? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    update-alternatives --install /usr/bin/vim vim "/usr/local/bin/nvim" 110
+fi
+
+read -p "Do you want NVIM to provide 'ex'? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    update-alternatives --install /usr/bin/ex ex "/usr/local/bin/neovim/ex" 110
+fi
+
+read -p "Do you want NVIM to provide 'view'? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    update-alternatives --install /usr/bin/view view "/usr/local/bin/neovim/view" 110
+fi
+
+read -p "Do you want NVIM to provide 'vimdiff'? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    update-alternatives --install /usr/bin/vimdiff vimdiff "/usr/local/bin/neovim/vimdiff" 110
+fi
+
+echo "Run $HOME/.config/nvim/undo-setup-nvim-as-default-editor to undo these changes."

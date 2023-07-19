@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -euo pipefail
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+read -p "Install Neovim configs? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cp -r "$SCRIPT_DIR/.config/nvim" "$HOME/.config/"
+
+    read -p "Setup Neovim as default editor (update-alternatives)? " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        sudo "$HOME/.config/nvim/setup-nvim-as-default-editor"
+    fi
+fi
+
+read -p "Install basic Vim config? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cp "$SCRIPT_DIR/.vimrc" "$HOME/.vimrc"
+fi
+
+read -p "Install basic tmux config? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cp -r "$SCRIPT_DIR/.config/tmux" "$HOME/.config/"
+fi
+
+read -p "Install alacritty configs? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cp -r "$SCRIPT_DIR/.config/alacritty" "$HOME/.config/"
+fi

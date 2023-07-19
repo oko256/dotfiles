@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [[ $EUID -ne 0 ]]
+then
+    echo "This script must be run as root" 1>&2
+    exit 1
+fi
+
+set -euo pipefail
+
+update-alternatives --remove vi "/usr/local/bin/nvim" || true
+update-alternatives --remove vim "/usr/local/bin/nvim" || true
+update-alternatives --remove ex "/usr/local/bin/neovim/ex" || true
+update-alternatives --remove view "/usr/local/bin/neovim/view" || true
+update-alternatives --remove vimdiff "/usr/local/bin/neovim/vimdiff" || true
+
+rm "/usr/local/bin/neovim/ex" || true
+rm "/usr/local/bin/neovim/view" || true
+rm "/usr/local/bin/neovim/vimdiff" || true
