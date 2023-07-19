@@ -32,11 +32,10 @@ opt.smartindent = true
 opt.scrolloff = 3       -- Scroll window before cursor hits the last line
 
 opt.termguicolors = true    -- Enable 24-bit colors in the TUI
--- opt.lazyredraw = true       -- Faster scrolling
+-- opt.lazyredraw = true       -- Enable if scrolling is slow
 opt.hidden = true           -- Allow background buffers
 
 -- opt.cmdheight = 2       -- Command line of 2 rows
--- opt.signcolumn = 'yes'  -- Always show sign column beside line number
 
 
 -- Disable some built-in plugins that interfere with our plugins
