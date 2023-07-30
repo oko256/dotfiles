@@ -12,3 +12,6 @@ vim.cmd('autocmd FileType help nnoremap <buffer> <CR> <C-]>')
 
 -- Clear search highlights with <leader>n
 vim.keymap.set('n', '<leader>n', ':noh<CR>', { noremap = true, silent = true })
+
+-- Exit insert mode in terminal with <leader><Esc>
+vim.keymap.set('t', '<leader><Esc>', '<C-\\><c-n>', { noremap = true, silent = true })
