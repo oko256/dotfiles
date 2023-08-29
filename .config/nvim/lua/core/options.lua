@@ -17,8 +17,8 @@ opt.undofile = true     -- Enable undofile for persistent undo
                         -- Disabled for now because some it breaks some plugins :(
 
 -- Ignore case in searches except when there's an uppercase character in search terms
-g.ignorecase = true
-g.smartcase = true
+opt.ignorecase = true
+opt.smartcase = true
 
 -- opt.colorcolumn = '80'  -- Highlight column 80 to discourage too long lines
 
