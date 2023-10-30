@@ -4,6 +4,7 @@ local opt = vim.opt     -- Shorthand for options (global/buffer/window)
 opt.number = true       -- Enable line numbers
 opt.cursorline = true   -- Highlight current line of the cursor
 opt.signcolumn = 'yes'  -- Always show signcolumn to stop columns from jumping
+opt.colorcolumn = '100' -- Show column 100 at different color
 
 -- Use spaces instead of tabs and always indent 4 spaces
 opt.shiftwidth = 4
