@@ -46,12 +46,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -144,8 +144,36 @@ then
     alias fd=/usr/bin/fdfind
 fi
 
+# bat / batcat (apt install batcat)
+if [ -f "/usr/bin/batcat" ]
+then
+    alias bat=/usr/bin/batcat
+fi
+
 # https://github.com/antonmedv/walk
 function lk() {
     cd "$(walk --icons "$@")"
 }
+
+alias ccmake='ccmake -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON'
+alias create_deb_from_make_install='fakeroot checkinstall --install=no --fstrans=yes -D'
+
+umedit() {
+    mkdir -p "$HOME/notes"
+    vim "$HOME/notes/$1.md"
+}
+um() {
+    p="$HOME/notes/$1.md"
+    if command -v bat &> /dev/null
+    then
+        bat "$p"
+    else
+        cat "$p"
+    fi
+}
+
+if command -v vim &> /dev/null
+then
+    export EDITOR=vim
+fi
 
