@@ -21,8 +21,6 @@ opt.undofile = true     -- Enable undofile for persistent undo
 opt.ignorecase = true
 opt.smartcase = true
 
--- opt.colorcolumn = '80'  -- Highlight column 80 to discourage too long lines
-
 opt.splitright = true   -- Vertical splits open right
 opt.splitbelow = false  -- Horizontal splits open above
 
