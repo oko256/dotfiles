@@ -150,6 +150,12 @@ then
     alias bat=/usr/bin/batcat
 fi
 
+# zoxide (apt install zoxide)
+if command -v zoxide &> /dev/null
+then
+    eval "$(zoxide init bash)"
+fi
+
 # https://github.com/antonmedv/walk
 function lk() {
     cd "$(walk --icons "$@")"
