@@ -42,7 +42,7 @@ require('lazy').setup({
 
     { 'nmac427/guess-indent.nvim' },
 
-    { 'phaazon/hop.nvim', branch = 'v2' },
+    { 'smoka7/hop.nvim', version = '*', opts = {} },
 
     {
         'nvim-telescope/telescope.nvim',
@@ -56,5 +56,7 @@ require('lazy').setup({
     },
 
     { 'ten3roberts/window-picker.nvim' },
+
+    { 'rhysd/git-messenger.vim' },
 
 })
