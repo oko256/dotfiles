@@ -12,6 +12,9 @@ opt.tabstop = 4
 opt.softtabstop = 4
 opt.expandtab = true
 
+-- C-style indentation pretty similar to WebKit style
+opt.cinoptions = ':0,l1,g0,N-s,E-s,(s'
+
 opt.undofile = true     -- Enable undofile for persistent undo
 
 -- opt.autochdir = true    -- Change to working directory of current file
@@ -36,6 +39,7 @@ opt.hidden = true           -- Allow background buffers
 
 -- opt.cmdheight = 2       -- Command line of 2 rows
 
+opt.tabpagemax = 100
 
 -- Disable some built-in plugins that interfere with our plugins
 local disabled_built_ins = {
