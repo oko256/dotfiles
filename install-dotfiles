@@ -59,3 +59,32 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
     cp -r "$SCRIPT_DIR/.bash-powerline.sh" "$HOME/.bash-powerline.sh"
 fi
+
+read -p "Add some nice global gitconfig and gitignore settings? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cat << EOF >> "$HOME/.gitconfig"
+[alias]
+    adog = log --all --decorate --oneline --graph
+    s = status
+	d = diff
+	subu = submodule update --recursive --init
+[core]
+	excludesfile = $HOME/.gitignore
+[color]
+	ui = auto
+[pull]
+	rebase = true
+[difftool]
+	prompt = true
+[diff]
+	tool = nvimdiff
+[difftool "nvimdiff"]
+	cmd = "nvim -d \\"\$LOCAL\\" \\"\$REMOTE\\""
+EOF
+    cat << EOF >> "$HOME/.gitignore"
+compile_commands.json
+.cache/
+EOF
+fi
