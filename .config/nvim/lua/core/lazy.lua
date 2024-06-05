@@ -59,4 +59,6 @@ require('lazy').setup({
 
     { 'rhysd/git-messenger.vim' },
 
+    { 'numToStr/Navigator.nvim' },
+
 })

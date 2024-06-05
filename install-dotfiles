@@ -39,6 +39,13 @@ then
     cp -r "$SCRIPT_DIR/.config/alacritty" "$HOME/.config/"
 fi
 
+read -p "Install wezterm configs? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cp -r "$SCRIPT_DIR/.wezterm.lua" "$HOME/.wezterm.lua"
+fi
+
 read -p "Install bashrc? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
