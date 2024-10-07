@@ -50,7 +50,7 @@ config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 
 config.audible_bell = 'Disabled'
 
-config.scrollback_lines = 10000
+config.scrollback_lines = 1000000
 
 config.disable_default_key_bindings = true
 config.keys = {
