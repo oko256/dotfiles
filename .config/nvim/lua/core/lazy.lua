@@ -17,10 +17,13 @@ require('lazy').setup({
 
     { 'catppuccin/nvim', name = 'catppuccin', priority = 1000, lazy = false },
 
-    { 'nvim-tree/nvim-tree.lua', dependencies = { 'nvim-tree/nvim-web-devicons' } },
+    {
+        'stevearc/oil.nvim',
+        opts = {},
+        dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+        lazy = false,
+    },
 
-    -- { 'freddiehaddad/feline.nvim' },
-    --
     { 'nvim-lualine/lualine.nvim' },
 
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
@@ -85,6 +88,26 @@ require('lazy').setup({
                 desc = 'Create a selection for selected text or word under the cursor',
             },
         },
+    },
+
+    {
+        'akinsho/bufferline.nvim',
+        version = "*",
+        dependencies = 'nvim-tree/nvim-web-devicons'
+    },
+
+    {
+        'rmagatti/auto-session',
+        lazy = false,
+        lazy_support = true,
+        opts = {
+            auto_create = false,
+        },
+    },
+
+    {
+        'github/copilot.vim',
+        enabled = vim.g.use_copilot,
     }
 
 })

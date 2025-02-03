@@ -41,6 +41,15 @@ opt.hidden = true           -- Allow background buffers
 
 opt.tabpagemax = 100
 
+-- Better options for session management
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
+-- Fold with treesitter by default (but start with all folds open)
+opt.foldmethod = 'expr'
+opt.foldexpr = 'nvim_treesitter#foldexpr()'
+opt.foldminlines = 4
+opt.foldlevelstart = 99
+
 -- Disable some built-in plugins that interfere with our plugins
 local disabled_built_ins = {
     'netrw',

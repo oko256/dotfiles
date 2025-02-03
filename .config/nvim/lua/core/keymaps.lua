@@ -5,7 +5,9 @@
 -- vim.keymap.set('n', '<S-Left>',  '<c-w>h', { noremap = true, silent = true })
 
 -- Toggle nvim-tree with <leader>e
-vim.keymap.set('n', '<leader>e', ':NvimTreeFindFileToggle!<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<leader>e', ':NvimTreeFindFileToggle!<CR>', { noremap = true, silent = true })
+-- Open parent directory of current file in floating Oil file explorer
+vim.keymap.set('n', '<leader>e', '<CMD>Oil --float<CR>', { desc = "Open parent directory of current file" })
 
 -- Enter to jump to subject under cursor in help
 vim.cmd('autocmd FileType help nnoremap <buffer> <CR> <C-]>')
@@ -19,4 +21,8 @@ vim.keymap.set('t', '<leader><Esc>', '<C-\\><c-n>', { noremap = true, silent = t
 -- Use <leader>s to switch between header and source in clangd supported files
 vim.keymap.set('n', '<leader>s', ':ClangdSwitchSourceHeader<CR>', { noremap = true, silent = true })
 
-vim.keymap.set('o', 'm', ':<C-U>lua require("tsht").nodes()<CR>', { silent = true })
+if vim.g.use_copilot then
+    -- Accept Copilot completions with Ctrl-Tab
+    vim.keymap.set('i', '<C-Tab>', 'copilot#Accept("")', { noremap = true, silent = true, expr = true, replace_keycodes = false })
+    vim.g.copilot_no_tab_map = true
+end

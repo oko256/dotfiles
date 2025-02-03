@@ -1,3 +1,3 @@
 require('lualine').setup {
-    extensions = { 'nvim-tree', 'lazy' },
+    extensions = { 'lazy' },
 }

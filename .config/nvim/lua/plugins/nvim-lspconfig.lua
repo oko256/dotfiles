@@ -113,7 +113,7 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches.
 -- Add your language server below:
-local servers = { 'bashls', 'pylsp', 'clangd', 'cmake', 'ts_ls' }
+local servers = { 'bashls', 'pylsp', 'cmake', 'ts_ls' }
 
 -- Call setup
 for _, lsp in ipairs(servers) do
@@ -127,3 +127,13 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+capabilities['offsetEncoding'] = { 'utf-16' }
+lspconfig['clangd'].setup {
+  on_attach = on_attach,
+  root_dir = root_dir,
+  capabilities = capabilities,
+  flags = {
+    -- default in neovim 0.7+
+    debounce_text_changes = 150,
+  }
+}
