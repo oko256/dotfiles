@@ -72,24 +72,80 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     cat << EOF >> "$HOME/.gitconfig"
+[color]
+    # Colors are nice.
+    ui = auto
+[column]
+    # Columnize listings according to terminal width.
+    ui = auto
+[branch]
+    # Sort branches by most recent commit first.
+    sort = -committerdate
+[tag]
+    # Sort tags lexically with newest first, e.g. the wrong default sorting:
+    # 9.0.0, 9.0.1, 9.0.10, 9.0.11, 9.0.2, 9.0.3
+    # instead becomes:
+    # 9.0.11, 9.0.10, 9.0.3, 9.0.2, 9.0.1, 9.0.0
+    sort = -v:refname
+[diff]
+    # Use better diff algorithm than the old default.
+    algorithm = histogram
+    # Use different color for moved blocks and inserted blocks.
+    colorMoved = plain
+    # Instead of a/ and b/ prefixes in paths, use c/i/w to indicate commit/index/worktree.
+    mnemonicPrefix = true
+    # Detect if file was renamed.
+    renames = true
+    # If diffing with external tool, use nvimdiff (see below).
+    tool = nvimdiff
+[difftool]
+    # Prompt when diffing with external tool.
+    prompt = true
+[difftool "nvimdiff"]
+    # Cmdline for using nvim to diff files.
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[push]
+    # Push only the current branch to same name in remote (I guess it's default now anyway).
+    default = simple
+    # Automatically set up remote tracking branches.
+    autoSetupRemote = true
+[fetch]
+    # By default, fetch all available remotes.
+    all = true
+    # Make "git fetch --prune" also prune tags.
+    pruneTags = true
+[help]
+    # Ask when autocorrect wants to fix your mistakes.
+    autocorrect = prompt
+[commit]
+    # It's convenient to have the full diff of the commit in the editor for reference when
+    # writing the commit message.
+    verbose = true
+[core]
+    # Global excludes file.
+    excludesfile = ~/.gitignore
+[rebase]
+    # When having stacked refs, make sure they are moved when branch is rebased.
+    updateRefs = true
+[merge]
+    # Show 3-way diff for parts with conflicts ("z" variant is in newer Git versions).
+    conflictstyle = zdiff3
+[pull]
+    # When pulling remote changes, rebase by default.
+    rebase = true
 [alias]
+    # Some convenient aliases.
     adog = log --all --decorate --oneline --graph
     s = status
-	d = diff
-	subu = submodule update --recursive --init
-[core]
-	excludesfile = $HOME/.gitignore
-[color]
-	ui = auto
-[pull]
-	rebase = true
-[difftool]
-	prompt = true
-[diff]
-	tool = nvimdiff
-[difftool "nvimdiff"]
-	cmd = "nvim -d \\"\$LOCAL\\" \\"\$REMOTE\\""
+    d = diff
+    subu = submodule update --recursive --init
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 EOF
+
     cat << EOF >> "$HOME/.gitignore"
 compile_commands.json
 .cache/
