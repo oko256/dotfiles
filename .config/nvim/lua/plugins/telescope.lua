@@ -16,3 +16,5 @@ vim.keymap.set('n', '<leader>g', function()
     end
 end, {})
 vim.keymap.set('n', '<leader>h', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>t', builtin.lsp_document_symbols, {})
+vim.keymap.set('n', '<leader>T', builtin.builtin, {})

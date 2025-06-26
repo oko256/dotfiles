@@ -17,6 +17,3 @@ require('plugins/hop')
 require('plugins/telescope')
 require('plugins/window-picker')
 require('plugins/navigator')
--- require('plugins/bufferline')
-
-require('auto-session').setup {}

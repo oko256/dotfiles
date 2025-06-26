@@ -97,17 +97,12 @@ require('lazy').setup({
     },
 
     {
-        'rmagatti/auto-session',
-        lazy = false,
-        lazy_support = true,
-        opts = {
-            auto_create = false,
-        },
+        'github/copilot.vim',
+        enabled = vim.g.use_copilot,
     },
 
     {
-        'github/copilot.vim',
-        enabled = vim.g.use_copilot,
-    }
+        'wsdjeg/vim-fetch',
+    },
 
 })
