@@ -105,4 +105,11 @@ require('lazy').setup({
         'wsdjeg/vim-fetch',
     },
 
+    {
+        'CopilotC-Nvim/CopilotChat.nvim',
+        enabled = vim.g.use_copilot,
+        dependencies = { {'github/copilot.vim'}, {'nvim-lua/plenary.nvim', branch = 'master'} },
+        build = 'make tiktoken',
+    },
+
 })

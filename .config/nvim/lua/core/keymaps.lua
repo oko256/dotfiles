@@ -20,9 +20,3 @@ vim.keymap.set('t', '<leader><Esc>', '<C-\\><c-n>', { noremap = true, silent = t
 
 -- Use <leader>s to switch between header and source in clangd supported files
 vim.keymap.set('n', '<leader>s', ':ClangdSwitchSourceHeader<CR>', { noremap = true, silent = true })
-
-if vim.g.use_copilot then
-    -- Accept Copilot completions with Ctrl-Tab
-    vim.keymap.set('i', '<C-Tab>', 'copilot#Accept("")', { noremap = true, silent = true, expr = true, replace_keycodes = false })
-    vim.g.copilot_no_tab_map = true
-end
