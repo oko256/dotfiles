@@ -15,8 +15,8 @@ HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=10000
-HISTFILESIZE=10000
+HISTSIZE=100000
+HISTFILESIZE=100000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -46,12 +46,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        # We have color support; assume it's compliant with Ecma-48
-        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-        # a case would tend to support setf rather than setaf.)
-        color_prompt=yes
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
     else
-        color_prompt=
+	color_prompt=
     fi
 fi
 
@@ -63,13 +63,13 @@ fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+# case "$TERM" in
+# xterm*|rxvt*)
+#     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+#     ;;
+# *)
+#     ;;
+# esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -114,7 +114,7 @@ PATH="$PATH:$HOME/.local/bin"
 
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a"
 
-# fzf (apt install fzf)
+# apt install fzf
 if [ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ]
 then
     source /usr/share/doc/fzf/examples/key-bindings.bash
@@ -132,7 +132,6 @@ then
     eval `dircolors $HOME/.dircolors.nord`
 fi
 
-# fd / fdfind (apt install fdfind)
 if [ -f "/usr/bin/fdfind" ]
 then
     alias fd=/usr/bin/fdfind
@@ -155,8 +154,17 @@ function lk() {
     cd "$(walk --icons "$@")"
 }
 
+# When doing Yocto Project stuff, this can be used to
+# know if have a bitbake environment currently sourced in.
+function is_bitbake() {
+    if [ -n "$BBPATH" ]
+    then
+        echo "Is bitbake: $BBPATH"
+    fi
+}
+
 alias ccmake='ccmake -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=ON'
-alias create_deb_from_make_install='fakeroot checkinstall --install=no --fstrans=yes -D'
+alias create_deb_from_make_install='fakeroot checkinstall --install=no --fstrans=yes -D --pkglicense CLOSED --nodoc --exclude /home'
 
 umedit() {
     mkdir -p "$HOME/notes"
@@ -178,6 +186,18 @@ export -f redstderr
 if command -v vim &> /dev/null
 then
     export EDITOR=vim
+    alias v="vim"
+fi
+
+if command -v ripgrep &> /dev/null
+then
+    alias rg="ripgrep --smart-case"
+elif command -v rg &> /dev/null
+then
+    alias rg="rg --smart-case"
 fi
 
 alias m="make -j$(nproc)"
+alias valgrinddd='valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose'
+
+# PUT DEVICE SPECIFIC ADDITIONS BELOW THIS LINE!
