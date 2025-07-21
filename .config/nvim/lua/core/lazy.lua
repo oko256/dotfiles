@@ -91,18 +91,31 @@ require('lazy').setup({
     },
 
     {
-        'akinsho/bufferline.nvim',
-        version = "*",
-        dependencies = 'nvim-tree/nvim-web-devicons'
-    },
-
-    {
         'github/copilot.vim',
         enabled = vim.g.use_copilot,
     },
 
     {
         'wsdjeg/vim-fetch',
+    },
+
+    {
+        'kevinhwang91/nvim-ufo',
+        dependencies = 'kevinhwang91/promise-async',
+    },
+
+    {
+        'rmagatti/auto-session',
+        lazy = false,
+        opts = {
+            auto_create = false,
+            git_use_branch_name = true,
+        },
+    },
+
+    {
+        'kevinhwang91/nvim-bqf',
+        dependencies = 'nvim-treesitter/nvim-treesitter',
     },
 
     {
