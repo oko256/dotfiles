@@ -6,11 +6,33 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 mkdir -p "$HOME/.local/bin"
 
+echo
+echo "You might want to do some of these things first before proceeding:"
+echo " - Build and install Neovim: https://github.com/neovim/neovim/blob/master/BUILD.md"
+echo " - Install wezterm: https://wezterm.org/install/linux.html"
+echo
+
+read -p "Done? Proceed? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo
+else
+    exit 0
+fi
+
 read -p "Install basic software? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     sudo apt install git wget unzip
+fi
+
+read -p "Install apt-listbugs and apt-listchanges? (especially on testing/unstable) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    sudo apt install apt-listbugs apt-listchanges
 fi
 
 read -p "Install zoxide? " -n 1 -r
@@ -141,6 +163,13 @@ then
     sudo cp "$SCRIPT_DIR/enable-zswap.service" "/etc/systemd/system/"
     sudo systemctl daemon-reload
     sudo systemctl --now enable enable-zswap.service
+fi
+
+read -p "Show user list in lightdm login greeter? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    sudo sed -i 's/#greeter-hide-users=false/greeter-hide-users=false/' "/etc/lightdm/lightdm.conf"
 fi
 
 echo
