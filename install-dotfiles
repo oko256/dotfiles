@@ -111,13 +111,6 @@ then
     cp -r "$SCRIPT_DIR/.bashrc" "$HOME/.bashrc"
 fi
 
-read -p "Install nord dircolors? " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-    cp -r "$SCRIPT_DIR/.dircolors.nord" "$HOME/.dircolors.nord"
-fi
-
 read -p "Install bash powerline? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
