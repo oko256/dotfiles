@@ -4,6 +4,64 @@ set -euo pipefail
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+mkdir -p "$HOME/.local/bin"
+
+read -p "Install basic software? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    sudo apt install git wget unzip
+fi
+
+read -p "Install zoxide? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    sudo apt install zoxide
+fi
+
+read -p "Install redshift-gtk and config? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    sudo apt install redshift-gtk
+    tee "$HOME/.config/redshift.conf" >/dev/null <<EOF
+[redshift]
+temp-day=6500
+temp-night=4000
+transition=0
+dawn-time=07:00
+dusk-time=22:30
+EOF
+    echo "NOTE: Enable autostart by starting redshift and choosing the option in the menu."
+fi
+
+read -p "Install walk (and Go as dependency)? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    sudo apt install golang
+    go install github.com/antonmedv/walk@latest
+    ln -s "$HOME/go/bin/walk" "$HOME/.local/bin/walk"
+fi
+
+read -p "Install fonts? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    sudo apt install fonts-noto-core
+
+    mkdir /tmp/JetBrainsMonoNerd
+    wget 'https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip' -O /tmp/JetBrainsMonoNerd/JetBrainsMono.zip
+    pushd /tmp/JetBrainsMonoNerd
+    unzip JetBrainsMono.zip
+    sudo mkdir -p /usr/share/fonts/truetype/JetBrainsMonoNerd
+    sudo cp /tmp/JetBrainsMonoNerd/*.ttf /usr/share/fonts/truetype/JetBrainsMonoNerd/
+    popd
+    sudo rm -rf /tmp/JetBrainsMonoNerd
+    sudo fc-cache -f
+fi
+
 read -p "Install Neovim configs? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
@@ -67,11 +125,18 @@ then
     cp -r "$SCRIPT_DIR/.bash-powerline.sh" "$HOME/.bash-powerline.sh"
 fi
 
-read -p "Add some nice global gitconfig and gitignore settings? " -n 1 -r
+read -p "Install xfce configs? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    cat << EOF >> "$HOME/.gitconfig"
+    cp -r "$SCRIPT_DIR/.config/xfce4" "$HOME/.config/"
+fi
+
+read -p "Replace global gitconfig and gitignore settings? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    tee "$HOME/.gitconfig" >/dev/null <<EOF
 [color]
     # Colors are nice.
     ui = auto
@@ -103,7 +168,7 @@ then
     prompt = true
 [difftool "nvimdiff"]
     # Cmdline for using nvim to diff files.
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+    cmd = "nvim -d \"\$LOCAL\" \"\$REMOTE\""
 [push]
     # Push only the current branch to same name in remote (I guess it's default now anyway).
     default = simple
@@ -146,8 +211,13 @@ then
     required = true
 EOF
 
-    cat << EOF >> "$HOME/.gitignore"
+    tee "$HOME/.gitignore" >/dev/null <<EOF
 compile_commands.json
 .cache/
 EOF
 fi
+
+echo "More nice things to remember:"
+echo " - Install Simple-Adw-Dark cursors from https://gitlab.com/cursors/simp1e"
+echo " - If mouse cursor is HUGE, go to Mouse Settings and change cursor size to something else"
+echo "   than 16, and then back to 16."
