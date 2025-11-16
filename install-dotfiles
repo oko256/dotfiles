@@ -172,6 +172,14 @@ then
     sudo sed -i 's/#greeter-hide-users=false/greeter-hide-users=false/' "/etc/lightdm/lightdm.conf"
 fi
 
+read -p "Install SpeedCrunch config? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cp -r "$SCRIPT_DIR/.config/SpeedCrunch" "$HOME/.config/"
+    echo "Install SpeedCrunch: https://heldercorreia.bitbucket.io/speedcrunch/download.html"
+fi
+
 echo
 echo "More nice things to remember:"
 echo " - Install Simple-Adw-Dark cursors from https://gitlab.com/cursors/simp1e"
