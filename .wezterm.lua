@@ -79,8 +79,7 @@ config.keys = {
     { key = '8',            mods = 'SUPER',         action = act.ActivateTab(7) },
     { key = '9',            mods = 'SUPER',         action = act.ActivateTab(8) },
 
-    { key = 'Tab',          mods = 'SUPER',         action = act.ActivateTabRelative(1) },
-    { key = 'Tab',          mods = 'SUPER|SHIFT',   action = act.ActivateTabRelative(-1) },
+    { key = 'Tab',          mods = 'SUPER',         action = act.ActivateLastTab },
 
     { key = 'PageUp',       mods = 'CTRL|SHIFT',    action = act.MoveTabRelative(1) },
     { key = 'PageDown',     mods = 'CTRL|SHIFT',    action = act.MoveTabRelative(-1) },
@@ -118,5 +117,10 @@ config.use_fancy_tab_bar = false
 
 config.initial_rows = 30
 config.initial_cols = 120
+
+config.inactive_pane_hsb = {
+    saturation = 0.9,
+    brightness = 0.7,
+}
 
 return config
