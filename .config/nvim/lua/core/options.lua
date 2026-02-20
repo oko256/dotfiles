@@ -50,6 +50,9 @@ opt.foldexpr = 'nvim_treesitter#foldexpr()'
 opt.foldminlines = 4
 opt.foldlevelstart = 99
 
+-- Faster updatetime for CursorHold events
+opt.updatetime = 1000
+
 -- Disable some built-in plugins that interfere with our plugins
 local disabled_built_ins = {
     'netrw',
