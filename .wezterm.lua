@@ -32,11 +32,10 @@ end
 
 -- Neovim pane navigation integration ends
 
-config.color_scheme = 'Ayu Dark (Gogh)'
+config.color_scheme = 'Monokai Soda'
 config.colors = {
     foreground = '#d8d8d8',
-    background = '#060606',
-
+    background = '#000000',
     cursor_fg = '#000000',
     cursor_bg = '#d8d8d8',
     cursor_border = '#d8d8d8',

@@ -26,7 +26,7 @@ require('lazy').setup({
 
     { 'nvim-lualine/lualine.nvim' },
 
-    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+    { 'nvim-treesitter/nvim-treesitter', branch = 'master', build = ':TSUpdate' },
 
     { 'neovim/nvim-lspconfig' },
 
