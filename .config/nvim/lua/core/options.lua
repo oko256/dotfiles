@@ -4,7 +4,7 @@ local opt = vim.opt     -- Shorthand for options (global/buffer/window)
 opt.number = true       -- Enable line numbers
 opt.cursorline = true   -- Highlight current line of the cursor
 opt.signcolumn = 'yes'  -- Always show signcolumn to stop columns from jumping
-opt.colorcolumn = '100' -- Show column 100 at different color
+opt.colorcolumn = '120' -- Show column 120 at different color
 
 -- Use spaces instead of tabs and always indent 4 spaces
 opt.shiftwidth = 4
@@ -52,6 +52,9 @@ opt.foldlevelstart = 99
 
 -- Faster updatetime for CursorHold events
 opt.updatetime = 1000
+
+-- Copy/paste from/to system clipboard by default if available
+opt.clipboard:append("unnamedplus")
 
 -- Disable some built-in plugins that interfere with our plugins
 local disabled_built_ins = {

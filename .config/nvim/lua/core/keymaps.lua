@@ -19,4 +19,7 @@ vim.keymap.set('n', '<leader>n', ':noh<CR>', { noremap = true, silent = true })
 vim.keymap.set('t', '<leader><Esc>', '<C-\\><c-n>', { noremap = true, silent = true })
 
 -- Use <leader>s to switch between header and source in clangd supported files
-vim.keymap.set('n', '<leader>s', ':ClangdSwitchSourceHeader<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>s', ':LspClangdSwitchSourceHeader<CR>', { noremap = true, silent = true })
+
+-- Use <Space> in normal mode to toggle folds
+vim.keymap.set('n', '<Space>', 'za', { noremap = true, silent = true })

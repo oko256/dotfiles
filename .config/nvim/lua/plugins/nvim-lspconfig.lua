@@ -58,6 +58,24 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gc', vim.lsp.buf.incoming_calls, bufopts)
 end
 
+local bufopts = { noremap=true, silent=true }
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+vim.keymap.set('n', '<leader>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+end, bufopts)
+vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+vim.keymap.set('', '<leader>f', function() vim.lsp.buf.format { async = false } end, bufopts)
+vim.keymap.set('n', 'gc', vim.lsp.buf.incoming_calls, bufopts)
+
 -- Diagnostic settings:
 -- see: `:help vim.diagnostic.config`
 -- Customizing how diagnostics are displayed
@@ -89,37 +107,37 @@ vim.keymap.set('n', 'gq', vim.diagnostic.setloclist, opts)
 -- Setup language servers
 
 vim.lsp.config('bashls', {
-    on_attach = on_attach,
+    -- on_attach = on_attach,
     capabilities = capabilities,
 })
 vim.lsp.enable('bashls')
 
 vim.lsp.config('pylsp', {
-    on_attach = on_attach,
+    -- on_attach = on_attach,
     capabilities = capabilities,
 })
 vim.lsp.enable('pylsp')
 
 vim.lsp.config('ruff', {
-    on_attach = on_attach,
+    -- on_attach = on_attach,
     capabilities = capabilities,
 })
 vim.lsp.enable('ruff')
 
 vim.lsp.config('neocmake', {
-    on_attach = on_attach,
+    -- on_attach = on_attach,
     capabilities = capabilities,
 })
 vim.lsp.enable('neocmake')
 
 vim.lsp.config('ts_ls', {
-    on_attach = on_attach,
+    -- on_attach = on_attach,
     capabilities = capabilities,
 })
 vim.lsp.enable('ts_ls')
 
 vim.lsp.config('typos_lsp', {
-    on_attach = on_attach,
+    -- on_attach = on_attach,
     capabilities = capabilities,
 })
 vim.lsp.enable('typos_lsp')
@@ -129,7 +147,7 @@ vim.lsp.enable('typos_lsp')
 -- unless we explicitly define the offset encoding like this:
 capabilities['offsetEncoding'] = { 'utf-16' }
 vim.lsp.config('clangd', {
-    on_attach = on_attach,
+    -- on_attach = on_attach,
     capabilities = capabilities,
 })
 vim.lsp.enable('clangd')

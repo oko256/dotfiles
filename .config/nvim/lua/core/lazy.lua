@@ -69,6 +69,7 @@ require('lazy').setup({
         cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
         build = "cd app && yarn install",
         init = function()
+            vim.g.mkdp_theme = 'light'
             vim.g.mkdp_filetypes = { "markdown" }
         end,
         ft = { "markdown" },
@@ -108,7 +109,7 @@ require('lazy').setup({
         'rmagatti/auto-session',
         lazy = false,
         opts = {
-            auto_create = false,
+            auto_create = true,
             git_use_branch_name = true,
         },
     },
